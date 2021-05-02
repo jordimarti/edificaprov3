@@ -1,0 +1,13 @@
+es:
+  layouts:
+    desktop_navigation:
+      home: "Inicio"
+      videos: "Vídeos"
+      articles: "Artículos"
+      courses: "Cursos"
+      directs: "Directos"
+      chat: "Chat"
+      subscriptions: "Suscripciones"
+  home:
+    top_bar:
+      login: "Iniciar sesión"
