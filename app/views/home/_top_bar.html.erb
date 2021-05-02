@@ -35,26 +35,29 @@
             </svg>
           </button>
 
-          <div class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-gray hover:text-gray-900 hover:bg-white mt-4 lg:mt-0">
-            <div class="relative" data-controller="dropdown">
-              <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
-                <span class="appearance-none flex items-center inline-block text-gray-700">
-                  <% if current_user %>
+          <% if 1 %>
+            <div class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-gray hover:text-gray-900 hover:bg-white mt-4 lg:mt-0">
+              <div class="relative" data-controller="dropdown">
+                <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
+                  <span class="appearance-none flex items-center inline-block text-gray-700">
                     <span class="sr-only">Open user menu</span>
                     <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=6OYDruMLGe&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                  <% else %>
-                    <%= link_to t('.login'), new_user_session_path %>
-                  <% end %>
-                </span>
-              </div>
-              <div data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
-                <div class="bg-white shadow rounded border overflow-hidden">
-                  <%= link_to 'Profile',  edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-                  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+                  
+                  </span>
+                </div>
+                <div data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
+                  <div class="bg-white shadow rounded border overflow-hidden w-64">
+                    <%= link_to t('.profile'),  edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+                    <%= link_to t('.sign_out'), destroy_user_session_path, method: :delete, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          <% else %>
+            <div class="text-sm px-4 py-2">
+              <%= link_to t('.login'), new_user_session_path %>
+            </div>
+          <% end %>
 
         </div>
       </div>

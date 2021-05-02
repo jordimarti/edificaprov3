@@ -11,3 +11,5 @@ es:
   home:
     top_bar:
       login: "Iniciar sesión"
+      profile: "Configuración de la cuenta"
+      sign_out: "Cerrar la sesión"

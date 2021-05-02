@@ -11,3 +11,5 @@ en:
   home:
     top_bar:
       login: "Log in"
+      profile: "Account configuration"
+      sign_out: "Sign out"
