@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Video:</strong>
+  <%= @video_rating.video_id %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @video_rating.score %>
+</p>
+
+<%= link_to 'Edit', edit_video_rating_path(@video_rating) %> |
+<%= link_to 'Back', video_ratings_path %>

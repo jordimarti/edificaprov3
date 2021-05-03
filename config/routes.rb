@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :video_ratings
+  resources :videos
+  get 'about/terms'
+  get 'about/privacy'
   devise_for :users
   root to: "home#index"
   get 'home/index'
