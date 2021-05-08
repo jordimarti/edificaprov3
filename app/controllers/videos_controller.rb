@@ -1,28 +1,34 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :set_video, only: %i[ show edit update destroy ]
+  after_action :verify_authorized
 
   # GET /videos or /videos.json
   def index
     @videos = Video.all
+    authorize @videos
   end
 
   # GET /videos/1 or /videos/1.json
   def show
+    authorize @video
   end
 
   # GET /videos/new
   def new
     @video = Video.new
+    authorize @video
   end
 
   # GET /videos/1/edit
   def edit
+    authorize @video
   end
 
   # POST /videos or /videos.json
   def create
     @video = Video.new(video_params)
+    authorize @video
 
     respond_to do |format|
       if @video.save
@@ -37,6 +43,7 @@ class VideosController < ApplicationController
 
   # PATCH/PUT /videos/1 or /videos/1.json
   def update
+    authorize @video
     respond_to do |format|
       if @video.update(video_params)
         format.html { redirect_to @video, notice: "Video was successfully updated." }
@@ -50,6 +57,7 @@ class VideosController < ApplicationController
 
   # DELETE /videos/1 or /videos/1.json
   def destroy
+    authorize @video
     @video.destroy
     respond_to do |format|
       format.html { redirect_to videos_url, notice: "Video was successfully destroyed." }

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :switch_locale
+  include Pundit
 
   def switch_locale(&action)
     logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
@@ -12,10 +13,32 @@ class ApplicationController < ActionController::Base
     I18n.with_locale(locale, &action)
   end
 
+  def current_organization
+    if session[:organization_id].present?
+      @current_organization ||= current_user.organizations.find(session[:organization_id])
+    else
+      @current_organization = 0
+    end
+  end
+  helper_method :current_organization
+
+  set_current_tenant_through_filter
+  before_action :set_tenant
+
+  def set_tenant
+    if current_organization != nil && current_organization != 0
+      set_current_tenant(current_organization)
+    else
+      set_current_tenant(current_user)
+    end
+  end
+
+  
+
 	protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :locale])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :locale])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :role, :locale])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :role, :locale])
   end
 
   private

@@ -24,4 +24,6 @@
 
 <br>
 
-<%= link_to 'New Video', new_video_path %>
+<% if policy(Video).new? %>
+  <%= link_to 'New Video', new_video_path %>
+<% end %>

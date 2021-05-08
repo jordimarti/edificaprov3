@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :organizations
+  get 'accounts/switch'
   resources :video_ratings
   resources :videos
   get 'about/terms'

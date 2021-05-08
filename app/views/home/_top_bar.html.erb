@@ -42,12 +42,19 @@
                   <span class="appearance-none flex items-center inline-block text-gray-700">
                     <span class="sr-only">Open user menu</span>
                     <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=6OYDruMLGe&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                  
+                    <%= current_user.role %>
+                    <%= session[:organization_id] %>
                   </span>
                 </div>
                 <div data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
                   <div class="bg-white shadow rounded border overflow-hidden w-64">
                     <%= link_to t('.profile'),  edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+                    <% if @organizations.count > 0 %>
+                      <%= link_to current_user.name, accounts_switch_path(id: 0), class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+                      <% @organizations.each do |org| %>
+                        <%= link_to org.name, accounts_switch_path(id: org.id), class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+                      <% end %>
+                    <% end %>
                     <%= link_to t('.sign_out'), destroy_user_session_path, method: :delete, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
                   </div>
                 </div>
